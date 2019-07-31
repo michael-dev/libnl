@@ -49,6 +49,7 @@ static struct nla_policy log_msg_policy[NFULA_MAX+1] = {
 	[NFULA_GID]			= { .type = NLA_U32 },
 	[NFULA_SEQ]			= { .type = NLA_U32 },
 	[NFULA_SEQ_GLOBAL]		= { .type = NLA_U32 },
+	[NFULA_VLAN_TAG]		= { .type = NLA_U16 },
 };
 
 int nfnlmsg_log_msg_parse(struct nlmsghdr *nlh, struct nfnl_log_msg **result)
@@ -146,6 +147,10 @@ int nfnlmsg_log_msg_parse(struct nlmsghdr *nlh, struct nfnl_log_msg **result)
 	attr = tb[NFULA_SEQ_GLOBAL];
 	if (attr)
 		nfnl_log_msg_set_seq_global(msg, ntohl(nla_get_u32(attr)));
+
+	attr = tb[NFULA_VLAN_TAG];
+	if (attr)
+		nfnl_log_msg_set_vlan_tag(msg, ntohs(nla_get_u16(attr)));
 
 	*result = msg;
 	return 0;
