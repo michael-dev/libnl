@@ -1020,6 +1020,8 @@ struct nfnl_log_msg {
 	void *			log_msg_hwheader;
 	int			log_msg_hwheader_len;
 	uint16_t		log_msg_vlan_tag;
+	uint32_t		log_msg_ct_info;
+	struct nfnl_ct *	log_msg_ct;
 };
 
 struct nfnl_queue {
